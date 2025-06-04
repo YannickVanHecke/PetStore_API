@@ -16,10 +16,17 @@ namespace PetStore.Data.Repositoriy
             this.context = context;
         }
 
+        public IEnumerable<Pet> FindAll()
+        {
+            return this.context.Pets;
+        }
+
         public void Add(Pet pet)
         {
             this.context.Add(pet);
         }
+
+        
 
         public void SaveChanges()
         {
