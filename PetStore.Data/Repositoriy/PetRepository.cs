@@ -1,4 +1,5 @@
-﻿using PetStore.Data.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using PetStore.Data.Model;
 using PetStore.Data.Repositoriy.Interface;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace PetStore.Data.Repositoriy
             this.context = context;
         }
 
-        public IEnumerable<Pet> FindAll()
+        public Task<List<Pet>> FindAll()
         {
-            return this.context.Pets;
+            return this.context.Pets.ToListAsync();
         }
 
         public void Add(Pet pet)
