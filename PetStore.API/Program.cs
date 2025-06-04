@@ -1,6 +1,8 @@
 using PetStore.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using PetStore.Data.Repositoriy.Interface;
+using PetStore.Data.Repositoriy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PetStoreContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("PetStore")));
+
+builder.Services.AddScoped<IPetRepository, PetRepository>();
 
 var app = builder.Build();
 
