@@ -27,8 +27,8 @@ namespace PetStore.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PetDTO>>> GetPets()
         {
-            var petsResult = this.petRepository.FindAll();
-            var pets = petsResult.ToList().Select(p => new PetDTO()
+            var petsResult = await this.petRepository.FindAll();
+            var pets = petsResult.Select(p => new PetDTO()
             {
                 Id = p.Id,
                 Name = p.Name,
