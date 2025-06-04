@@ -9,7 +9,9 @@ namespace PetStore.Data.Repositoriy.Interface
 {
     public interface IPetRepository
     {
+        IEnumerable<Pet> FindAll();
         void Add(Pet pet);
         void SaveChanges();
+
     }
 }
