@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetStore.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace PetStore.Data.Repositoriy.Interface
 {
     public interface IPetRepository
     {
+        void Add(Pet pet);
+        void SaveChanges();
     }
 }
