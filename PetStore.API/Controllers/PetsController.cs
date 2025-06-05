@@ -95,7 +95,6 @@ namespace PetStore.API.Controllers
             {
                 var pet = new Pet()
                 {
-                    Id = petDTO.Id,
                     Name = petDTO.Name,
                     Description = petDTO.Description,
                     BirthDate = petDTO.BirthDate,
