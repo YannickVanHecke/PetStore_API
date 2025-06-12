@@ -14,5 +14,6 @@ namespace PetStore.Model.Model
         public int AnimalType { get; set; }
         public DateTime BirthDate { get; set; }
         public bool Sex { get; set; }
+        public Double Price { get; set; }
     }
 }
