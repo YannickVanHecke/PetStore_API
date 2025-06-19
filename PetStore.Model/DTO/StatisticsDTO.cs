@@ -9,12 +9,12 @@ namespace PetStore.Model.DTO
     public class StatisticsDTO
     {
         public List<string> Labels { get; set; }
-        public List<DataPointDTO> Data { get; set; }
+        public Dictionary<string, int> Data { get; set; }
 
         public StatisticsDTO(IEnumerable<PetDTO> pets)
         {
             this.Labels = GetPetKind(pets);
-
+            this.Data = MapPets(pets);
 
         }
 
@@ -32,5 +32,24 @@ namespace PetStore.Model.DTO
 
             return labels;
         }
+
+        private Dictionary<string, int> MapPets(IEnumerable<PetDTO> pets) { 
+            var data = new Dictionary<string, int>();
+            foreach (var pet in pets)
+            {
+                if(!data.Keys.Contains(pet.Name)) {
+                    data.Add(pet.Name, 1);
+                }
+                else
+                {
+                    var numberOfPets = data[pet.Name];
+                    numberOfPets++;
+                    data.Remove(pet.Name);
+                    data.Add(pet.Name, numberOfPets);
+                }
+            }
+            return data;
+        }
+
     }
 }
