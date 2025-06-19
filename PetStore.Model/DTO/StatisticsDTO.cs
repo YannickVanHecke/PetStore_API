@@ -9,10 +9,12 @@ namespace PetStore.Model.DTO
     public class StatisticsDTO
     {
         public List<string> Labels { get; set; }
+        public List<DataPointDTO> Data { get; set; }
 
         public StatisticsDTO(IEnumerable<PetDTO> pets)
         {
             this.Labels = GetPetKind(pets);
+
 
         }
 
