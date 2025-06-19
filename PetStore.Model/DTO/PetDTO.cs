@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetStore.Model.Model
+namespace PetStore.Model.DTO
 {
     public class PetDTO
     {
