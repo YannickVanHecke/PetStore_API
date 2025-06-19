@@ -36,6 +36,7 @@ namespace PetStore.API.Controllers
                 BirthDate = p.BirthDate,
                 AnimalType = (int)p.AnimalType,
                 Sex = p.Sex,
+                Price = p.Price,
             });
             return Ok(pets);
         }
@@ -100,6 +101,7 @@ namespace PetStore.API.Controllers
                     BirthDate = petDTO.BirthDate,
                     AnimalType = (PetKind)petDTO.AnimalType,
                     Sex = petDTO.Sex,
+                    Price = petDTO.Price,
                 };
                 petRepository.Add(pet);
                 petRepository.SaveChanges();
