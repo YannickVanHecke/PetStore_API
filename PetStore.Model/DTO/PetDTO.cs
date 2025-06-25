@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetStore.Model.Model
+namespace PetStore.Model.DTO
 {
     public class PetDTO
     {
@@ -14,5 +14,6 @@ namespace PetStore.Model.Model
         public int AnimalType { get; set; }
         public DateTime BirthDate { get; set; }
         public bool Sex { get; set; }
+        public Double Price { get; set; }
     }
 }

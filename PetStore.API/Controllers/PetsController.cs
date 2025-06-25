@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PetStore.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using PetStore.Data.Model;
 using PetStore.Data.Repositoriy.Interface;
-using PetStore.Model.Model;
+using PetStore.Model.DTO;
 
 namespace PetStore.API.Controllers
 {
@@ -36,11 +29,14 @@ namespace PetStore.API.Controllers
                 BirthDate = p.BirthDate,
                 AnimalType = (int)p.AnimalType,
                 Sex = p.Sex,
+                Price = p.Price,
             });
             return Ok(pets);
         }
+
+
         // GET: api/Pets/5
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Pet>> GetPet(int id)
         {
             var pet = await _context.Pets.FindAsync(id);
@@ -51,11 +47,11 @@ namespace PetStore.API.Controllers
             }
 
             return pet;
-        }
+        }*/
 
         // PUT: api/Pets/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutPet(int id, Pet pet)
         {
             if (id != pet.Id)
@@ -82,21 +78,35 @@ namespace PetStore.API.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Pets
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pet>> PostPet(Pet pet)
+        public async Task<ActionResult<Pet>> PostPet(PetDTO petDTO)
         {
-            _context.Pets.Add(pet);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPet", new { id = pet.Id }, pet);
+            try
+            {
+                var pet = new Pet()
+                {
+                    Name = petDTO.Name,
+                    Description = petDTO.Description,
+                    BirthDate = petDTO.BirthDate,
+                    AnimalType = (PetKind)petDTO.AnimalType,
+                    Sex = petDTO.Sex,
+                    Price = petDTO.Price,
+                };
+                petRepository.Add(pet);
+                petRepository.SaveChanges();
+                return Ok(petDTO);
+            }
+            catch (Exception ex) { 
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         // DELETE: api/Pets/5
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<IActionResult> DeletePet(int id)
         {
             var pet = await _context.Pets.FindAsync(id);
@@ -109,11 +119,11 @@ namespace PetStore.API.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
-        private bool PetExists(int id)
+        /*private bool PetExists(int id)
         {
             return _context.Pets.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
